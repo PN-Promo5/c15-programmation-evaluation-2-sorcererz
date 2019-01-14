@@ -1,20 +1,24 @@
 // ---------EXERCICE 1---------
 
-//1.1/ Créez une fonction permettant d’afficher l’interface suivante
+//1.1/
 
+//creation of the first screen container
 let screen1 = document.createElement("div");
 
+// creation of the title
 let cinemaName = document.createElement("h1");
 cinemaName.textContent = "Cinéma Le Dauphin";
 
+//creation of the description
 let cinemaDescription = document.createElement("p");
 cinemaDescription.textContent = "Une salle de cinéma grand confort, un restaurant et une sélection de vins de qualité. Des avant premières, des rencontres, des ciné-repas, des débats, des ateliers, des ciné-goûters, de 11h30 à 23h du mardi au dimanche (jusqu’à minuit le vendredi et le samedi).";
 
+//creation of the button
 let cinemaButton = document.createElement("input");
 cinemaButton.type = "button";
 cinemaButton.value = "Voir les films à l’affiche cette semaine";
 
-
+//adding all these elements to the body
 document.body.appendChild(screen1);
 screen1.appendChild(cinemaName);
 screen1.appendChild(document.createElement("br"));
@@ -23,8 +27,9 @@ screen1.appendChild(document.createElement("br"));
 screen1.appendChild(cinemaButton);
 
 
-//1.2/ Créez un tableau à deux dimensions contenant les informations suivantes (ces informations sont liées aux films diffusés dans le cinéma)
+//1.2/
 
+//creation of the array for the movies
 let moviesThisWeek = [
   ["Titre du film", "Réalisateur", "Nationalité", "Année", "Durée", "Version"],
   ["IN MY ROOM", "Ulrich Köhler", "Allemagne", "2019", "2h", "vf"],
@@ -34,22 +39,31 @@ let moviesThisWeek = [
 ];
 
 
-// 1.3/ Créez une fonction prenant en paramètre un tableau à deux dimensions. Cette fonction doit créer et retourner une table HTML construite à partir des données contenues dans le tableau passé en paramètre. Notez que le 1er tableau contenu dans le tableau à deux dimensions passé en paramètre doit correspondre à l’en-tête de la table HTML retournée.
+// 1.3/
 
+//creation of the function converting the array into an HTML table
 function convertArrayIntoHTMLTab(array) {
+  // enumeration variables 1 et 2
   let i = 0;
-  let curElt;
   let j;
+
+  // current element 1 et 2
+  let curElt;
   let curElt2;
+
+  // creation of table elements
   let table = document.createElement("table");
   let thead = document.createElement("thead");
   let tbody = document.createElement("tbody");
   let trInHead = document.createElement("tr");
+
+  // adding these elements to the body
   document.body.appendChild(table);
   table.appendChild(thead);
   table.appendChild(tbody);
   thead.appendChild(trInHead);
 
+  // creation of the header using the first row of the array
   let firstRow = array[0];
   while (i < firstRow.length) {
     curElt = firstRow[i];
@@ -59,13 +73,17 @@ function convertArrayIntoHTMLTab(array) {
     i++;
   };
 
+  // excluding the first row of the array in enumeration since it's the header
   i = 1;
+
+  // looping through the array to create the rows
   while (i < array.length) {
     curElt = array[i];
     let tr = document.createElement("tr");
     tbody.appendChild(tr);
     i++;
     j = 0;
+    //looping through the rows to create the cells
     while (j < curElt.length) {
       curElt2 = curElt[j];
       let td = document.createElement("td");
@@ -77,12 +95,12 @@ function convertArrayIntoHTMLTab(array) {
 };
 
 
-//1.4/ Faites en sorte que lorsque le bouton “Voir les films à l’affiche cette semaine” (exercice 1.1) est cliqué :
-// - l’interface créée en 1.1 soit cachée
-// - la fonction créée en 1.3 soit appelée, et que la table HTML retournée par cette fonction soit affichée à l’écran
+//1.4/
 
+// adding the event listener to the cinema button
 cinemaButton.addEventListener("click", displayMoviesThisWeek, false);
 
+// function hiding the first screen and displaying the movie list
 function displayMoviesThisWeek() {
   screen1.style.display = "none";
   convertArrayIntoHTMLTab(moviesThisWeek);
@@ -92,8 +110,9 @@ function displayMoviesThisWeek() {
 
 // ---------EXERCICE 2---------
 
-// 2.1/ Créez un tableau à deux dimensions contenant les informations suivantes :
+// 2.1/
 
+// creation of the array for the substances
 let tempOfSubstances = [
   ["SUBSTANCES", "Température de fusion ou solidification en °C", "Température d’ébullition en °C"],
   ["acide acétique", "17", "118"],
@@ -104,36 +123,51 @@ let tempOfSubstances = [
 ];
 
 
-// 2.2/ Créez une fonction prenant deux paramètres :
-// - le tableau créé en 2.1
-// - un nombre
-// Cette fonction doit retourner un tableau de chaînes de caractères contenant le nom des substances dont la température d’ébullition en °C est inférieure au nombre passé en paramètre.
+// 2.2/
 
+// creation of the function comparing the boiling temperatures to the number
 function compTempOfSubstances(array, number) {
+ // enumeration excluding the first row since it's the header
  let i = 1;
+
+ // current element 1
  let curElt;
- let tab2 = [];
+
+ //array that will be used to store the result of the comparison
+ let array2 = [];
+
+ // looping through the array
  while (i < array.length) {
    curElt = array[i];
+   // if the current element in the third column is inferior to the number passed as parameter in the function, then it'll push the row into array2
    if (curElt[2] < number) {
-     tab2.push(curElt);
+     array2.push(curElt);
    }
   i++;
  }
- console.log(tab2);
+ //printing the result array to the console to make sure it worked
+ console.log(array2);
 
+ //creation of the HTML table of array2
+
+ // assigning i to 0 since we're going to loop through array2 this time
  i = 0;
+
+ // the rest is the same as the HTML table creation in exercice 1.3, except we're not creating a header
  let j;
  let curElt2;
  let table = document.createElement("table");
  let tbody = document.createElement("tbody");
- document.body.appendChild(document.createElement("br"));
- document.body.appendChild(table);
- document.body.appendChild(document.createElement("br"));
+
+ // adding the table into screen1 so that it also becomes hidden when displaying the movie list
+ screen1.appendChild(document.createElement("br"));
+ screen1.appendChild(document.createElement("br"));
+ screen1.appendChild(document.createElement("br"));
+ screen1.appendChild(table);
  table.appendChild(tbody);
 
- while (i < tab2.length) {
-   curElt = tab2[i];
+ while (i < array2.length) {
+   curElt = array2[i];
    let tr = document.createElement("tr");
    tbody.appendChild(tr);
    i++;
@@ -148,4 +182,5 @@ function compTempOfSubstances(array, number) {
  };
 };
 
+// calling the function
 compTempOfSubstances(tempOfSubstances, 100);
