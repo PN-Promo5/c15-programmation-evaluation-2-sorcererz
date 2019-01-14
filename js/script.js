@@ -1,4 +1,4 @@
-// ---------EXERCICE 1---------
+// ---------EXERCISE 1---------
 
 //1.1/
 
@@ -65,6 +65,8 @@ function convertArrayIntoHTMLTab(array) {
 
   // creation of the header using the first row of the array
   let firstRow = array[0];
+
+  // looping through the first row to create the th elements
   while (i < firstRow.length) {
     curElt = firstRow[i];
     let th = document.createElement("th");
@@ -108,7 +110,7 @@ function displayMoviesThisWeek() {
 
 
 
-// ---------EXERCICE 2---------
+// ---------EXERCISE 2---------
 
 // 2.1/
 
@@ -153,7 +155,7 @@ function compTempOfSubstances(array, number) {
  // assigning i to 0 since we're going to loop through array2 this time
  i = 0;
 
- // the rest is the same as the HTML table creation in exercice 1.3, except we're not creating a header
+ // the rest is the same as the HTML table creation in exercise 1.3, except we're not creating a header
  let j;
  let curElt2;
  let table = document.createElement("table");
